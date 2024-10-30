@@ -1,4 +1,4 @@
-# Centro hospitalario
+# Centro hospitalario identificador de hosñitales y nombres 
 query_creation_hospitales = """
 create table if not exists hospitales (
     ncodi INT primary key,
@@ -6,7 +6,7 @@ create table if not exists hospitales (
 );
 """
 
-# Tipos
+# Tipos de hospityalizacion de los hospitales 
 query_creation_tipo_hosp = """
 create table if not exists tipo_hospitalizacion (
     tipo_id SERIAL primary key,
@@ -17,45 +17,42 @@ create table if not exists tipo_hospitalizacion (
 # Gastos
 query_creation_gastos = """
 create table if not exists gastos (
-    gastos_id INT primary key,
+    gastos_id SERIAL primary key,
     año INT not null,
-    ncodi INT not null,
-    totalcompra DECIMAL(10, 2) not null, 
-    producfarma DECIMAL(10, 2) not null, 
-    materialsani DECIMAL(10, 2) not null, 
-    implantes DECIMAL(10, 2) not null, 
-    restomateriasani DECIMAL(10, 2) not null, 
-    servcontratado DECIMAL(10, 2) not null, 
-    trabajocontratado DECIMAL(10, 2) not null, 
-    xrestocompras DECIMAL(10, 2) not null, 
-    variaexistencias DECIMAL(10, 2) not null, 
-    servexteriores DECIMAL(10, 2) not null, 
-    sumistro DECIMAL(10, 2) not null, 
-    xrestoserviexter DECIMAL(10, 2) not null, 
-    gastopersonal DECIMAL(10, 2) not null, 
-    sueldos DECIMAL(10, 2) not null, 
-    indemnizacion DECIMAL(10, 2) not null, 
-    segsocempresa DECIMAL(10, 2) not null, 
-    otrgassocial DECIMAL(10, 2) not null, 
-    dotaamortizacion DECIMAL(10, 2) not null, 
-    perdidadeterioro DECIMAL(10, 2) not null, 
-    xrestogasto DECIMAL(10, 2) not null, 
-    totcompragasto DECIMAL(10, 2) not null,
-    foreign key (ncodi) references hospitales(ncodi)
+    totalcompra NUMERIC , 
+    producfarma NUMERIC , 
+    materialsani NUMERIC , 
+    implantes NUMERIC , 
+    restomateriasani NUMERIC , 
+    servcontratado NUMERIC , 
+    trabajocontratado NUMERIC , 
+    xrestocompras NUMERIC , 
+    variaexistencias NUMERIC , 
+    servexteriores NUMERIC , 
+    sumistro NUMERIC , 
+    xrestoserviexter NUMERIC , 
+    gastopersonal NUMERIC , 
+    sueldos NUMERIC , 
+    indemnizacion NUMERIC , 
+    segsocempresa NUMERIC , 
+    otrgassocial NUMERIC , 
+    dotaamortizacion NUMERIC , 
+    perdidadeterioro NUMERIC , 
+    xrestogasto NUMERIC , 
+    totcompragasto NUMERIC,
+    ncodi INT references hospitales(ncodi)
 );
 """
 
-# Ingresos
+# Ingresos hospitalizaciones 
 query_creation_ingresos = """
 create table if not exists ingresos (
-    id_ingresos INT primary key,
-    ncodi INT not null,
-    particulares DECIMAL(10, 2),
-    aseguradoras DECIMAL(10, 2),
-    aseguradoras_enfermedad DECIMAL(10, 2),
-    aseguradoras_trafico DECIMAL(10, 2),
-    mutuas DECIMAL(10, 2),
-    tipo_id INT not null,
-    foreign key (ncodi) references hospitales(ncodi),
-    foreign key (tipo_id) references tipo_hospitalizacion(tipo_id)
+    id_ingresos serial primary key,
+    particulares NUMERIC,
+    aseguradoras NUMERIC,
+    aseguradoras_enfermedad NUMERIC,
+    aseguradoras_trafico NUMERIC,
+    mutuas NUMERIC,
+    ncodi references hospitales(ncodi),
+    tipo_id references tipo_hospitalizacion(tipo_id)
 );"""
