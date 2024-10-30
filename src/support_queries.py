@@ -9,7 +9,7 @@ create table if not exists hospitales (
 # Tipos de hospityalizacion de los hospitales 
 query_creation_tipo_hosp = """
 create table if not exists tipo_hospitalizacion (
-    tipo_id SERIAL primary key,
+    tipo_id INT primary key,
     nombre VARCHAR(100) unique not null
     );
 """
@@ -18,12 +18,12 @@ create table if not exists tipo_hospitalizacion (
 query_creation_gastos = """
 create table if not exists gastos (
     gastos_id SERIAL primary key,
-    año INT not null,
-    totalcompra NUMERIC , 
-    producfarma NUMERIC , 
-    materialsani NUMERIC , 
-    implantes NUMERIC , 
-    restomateriasani NUMERIC , 
+    anio INT not null,
+    totalcompra NUMERIC, 
+    producfarma NUMERIC, 
+    materialsani NUMERIC, 
+    implantes NUMERIC, 
+    restomateriasani NUMERIC, 
     servcontratado NUMERIC , 
     trabajocontratado NUMERIC , 
     xrestocompras NUMERIC , 
@@ -36,8 +36,8 @@ create table if not exists gastos (
     indemnizacion NUMERIC , 
     segsocempresa NUMERIC , 
     otrgassocial NUMERIC , 
-    dotaamortizacion NUMERIC , 
-    perdidadeterioro NUMERIC , 
+    dotaamortizacion NUMERIC, 
+    perdidadeterioro NUMERIC, 
     xrestogasto NUMERIC , 
     totcompragasto NUMERIC,
     ncodi INT references hospitales(ncodi)
@@ -47,12 +47,14 @@ create table if not exists gastos (
 # Ingresos hospitalizaciones 
 query_creation_ingresos = """
 create table if not exists ingresos (
-    id_ingresos serial primary key,
+    id_ingresos SERIAL primary key,
     particulares NUMERIC,
     aseguradoras NUMERIC,
     aseguradoras_enfermedad NUMERIC,
     aseguradoras_trafico NUMERIC,
     mutuas NUMERIC,
-    ncodi references hospitales(ncodi),
-    tipo_id references tipo_hospitalizacion(tipo_id)
-);"""
+    tipo_id INT references tipo_hospitalizacion(tipo_id),
+    anio INT not null,
+    ncodi INT references hospitales(ncodi)
+);
+"""
